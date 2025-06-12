@@ -1,5 +1,6 @@
 package com.back.domain.global.initData;
 
+import com.back.domain.post.entity.Post;
 import com.back.domain.post.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -17,9 +18,15 @@ public class BaseInitData {
         return args -> {
             // 여기에 초기 데이터를 삽입하는 로직을 작성합니다.
             // 예: repository.save(new Entity(...));
-            System.out.println("기본 데이터가 초기화되었습니다.");
 
-            postRepository.count();
+            if (postRepository.count() > 0) return;
+
+            Post post1 = postRepository.save(new Post("제목 1", "내용 1"));
+            Post post2 = postRepository.save(new Post("제목 2", "내용 2"));
+
+
+            System.out.println("기본 데이터가 초기화되었습니다.");
+            // postRepository.count();
             // SELECT COUNT(*) FROM post;
         };
     }
