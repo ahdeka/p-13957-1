@@ -2,16 +2,17 @@ package com.back.domain.post.post.service;
 
 import com.back.domain.post.post.entity.Post;
 import com.back.domain.post.post.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     public Long count() {
         return postRepository.count();
@@ -23,5 +24,14 @@ public class PostService {
 
     public Optional<Post> findById(int i) {
         return postRepository.findById(i);
+    }
+
+    public void modify(Post post, String title, String content) {
+        post.setTitle(title);
+        post.setContent(content);
+        post.setModifyDate(LocalDateTime.now());
+
+        postRepository.save(post);
+        // UPDATE post SET title = ?, content = ?, modify_date = ? WHERE id = ?;
     }
 }
