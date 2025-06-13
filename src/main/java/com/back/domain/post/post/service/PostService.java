@@ -5,7 +5,6 @@ import com.back.domain.post.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -27,21 +26,8 @@ public class PostService {
     }
 
     public void modify(Post post, String title, String content) {
-        boolean changed = false;
-
+        post.setTitle(title);
         post.setContent(content);
-
-        if (!post.getTitle().equals(title)) {
-            post.setTitle(title);
-            changed = true;
-        }
-
-        if (!post.getContent().equals(content)) {
-            post.setContent(content);
-            changed = true;
-        }
-
-        if (changed) post.setModifyDate(LocalDateTime.now());
 
         postRepository.save(post);
         // UPDATE post SET title = ?, content = ?, modify_date = ? WHERE id = ?;
