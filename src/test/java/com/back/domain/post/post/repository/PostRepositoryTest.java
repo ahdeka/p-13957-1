@@ -5,12 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@ActiveProfiles("test") // Use the test profile to avoid using the production database
 @SpringBootTest
+@Transactional
 public class PostRepositoryTest {
 
     @Autowired
@@ -27,8 +29,6 @@ public class PostRepositoryTest {
 
     @Test
     @DisplayName("글 생성")
-    @Transactional
-    @Rollback
     void t2() {
         Post post = new Post("제목 new", "내용 new");
 
