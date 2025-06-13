@@ -1,7 +1,7 @@
 package com.back.domain.post.post.entity;
 
 
-import com.back.domain.global.jpa.entity.BaseEntity;
+import com.back.global.jpa.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;

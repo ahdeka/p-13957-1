@@ -1,4 +1,4 @@
-package com.back.domain.global.jpa.entity;
+package com.back.global.jpa.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @MappedSuperclass // 엔티이의 부모 클래스가 되려면 이 어노테이션이 필요
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-public class BaseEntity {
+public abstract class BaseEntity {
 
     @Id // Primary Key 를 의미한다.
     @GeneratedValue(strategy = IDENTITY) // Auto Increment 를 의미한다.

@@ -1,0 +1,33 @@
+package com.back.domain.post.post.repository;
+
+import com.back.domain.post.post.entity.Post;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+@SpringBootTest
+public class PostRepositoryTest {
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Test
+    @DisplayName("1번 글 조회")
+    void t1() {
+        Post post2 = postRepository.findById(2).get();
+
+        assertThat(post2.getTitle()).isEqualTo("제목 2");
+        assertThat(post2.getContent()).isEqualTo("내용 2");
+    }
+
+    @Test
+    @DisplayName("글 생성")
+    void t2() {
+        Post post = new Post("제목 new", "내용 new");
+        postRepository.save(post);
+
+    }
+}
